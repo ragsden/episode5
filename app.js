@@ -32,11 +32,20 @@ var exec = require('child_process').execFile;
     {
         frame(res,host);
     }
+    else if(pathname == "/io")
+    {
+        res.write("serving request " + reqid + "\n");
+
+        io(res, reqid);
+
+        console.log("added response " + reqid);
+
+    }
     else
     {
         res.write("serving request " + reqid + "\n");
 
-        shell(res, reqid);
+        sleep(0,res, reqid);
 
         console.log("added response " + reqid);
 
@@ -49,10 +58,10 @@ var exec = require('child_process').execFile;
 }).listen(Number(process.env.PORT || 5000));
 console.log('Server running at http://127.0.0.1:5000/');
 
-shell = function(res, reqid)
+io = function(res, reqid)
 {
     console.log(__dirname + '/sc.sh');
-    res.write("start time for request : (" + reqid + ") = " + new Date().getMinutes() + ":" + new Date().getSeconds() + ":" + new Date().getMilliseconds() + "\n");
+    res.write("start I/O time for request : (" + reqid + ") = " + new Date().getMinutes() + ":" + new Date().getSeconds() + ":" + new Date().getMilliseconds() + "\n");
     exec(__dirname + '/sc.sh' ,
 
         function (error, stdout, stderr) {
@@ -64,7 +73,7 @@ shell = function(res, reqid)
                 console.log('exec error: ' + error);
             }
             res.write(stdout);
-            res.write("end time for request : (" + reqid + ") = " + new Date().getMinutes() + ":" + new Date().getSeconds() + ":" + new Date().getMilliseconds() + "\n");
+            res.write("end I/O time for request : (" + reqid + ") = " + new Date().getMinutes() + ":" + new Date().getSeconds() + ":" + new Date().getMilliseconds() + "\n");
             res.end();
         });
 }
@@ -97,10 +106,12 @@ sleep = function (counter, res, reqid)
 frame = function (res, host)
 {
     res.write("<html></html><body><H1>This is the home page with two frames episode 5</H1>" +
-        "<iframe src='" + host + "/sleep?reqid=1'></iframe>" +
-        "<iframe src='" + host + "/sleep?reqid=2'></iframe>" +
-        //"<iframe src='" + host + "/sleepend?reqid=3'></iframe>" +
-        //"<iframe src='" + host + "/sleepend?reqid=4'></iframe>" +
+        "<iframe width='450px' src='" + host + "/io?reqid=1'></iframe>" +
+        "<iframe width='450px' src='" + host + "/io?reqid=2'></iframe> </br>" +
+        "<iframe width='450px' src='" + host + "/sleep?reqid=3'></iframe> " +
+        "<iframe width='450px' src='" + host + "/sleep?reqid=4'></iframe> </br>" +
+        "<iframe width='450px' src='" + host + "/sleepend?reqid=5'></iframe> " +
+        "<iframe width='450px' src='" + host + "/sleepend?reqid=6'></iframe>" +
         "</body></html>");
     res.end();
 
