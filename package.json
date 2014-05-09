@@ -4,7 +4,7 @@
   "description": "This is the first episode in njmyway node js learning series",
   "main": "app.js",
   "scripts": {
-    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+    "test": "make test"
   },
   "repository": {
     "type": "git",
@@ -12,6 +12,13 @@
   },
   "engines": {
     "node": "0.10.15"
+  },
+  "devDependencies": {
+    "istanbul": "0.1.x",
+    "xunit-file": "0.0.5"
+  },
+  "dependencies": {
+    "mocha": "^1.18.2"
   },
   "keywords": [
     "Learn",

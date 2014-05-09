@@ -105,7 +105,7 @@ sleep = function (counter, res, reqid)
 
 frame = function (res, host)
 {
-    res.write("<html></html><body><H1>This is the home page with two frames episode 5</H1>" +
+    res.write("<html></html><body><H1>This is the home page with SIX frames episode 5</H1>" +
         "<iframe width='450px' src='" + host + "/io?reqid=1'></iframe>" +
         "<iframe width='450px' src='" + host + "/io?reqid=2'></iframe> </br>" +
         "<iframe width='450px' src='" + host + "/sleep?reqid=3'></iframe> " +
