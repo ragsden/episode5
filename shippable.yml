@@ -8,4 +8,5 @@ after_script:
 notifications:
   email:
     - exampleone@org.com
-auto_commit: true
+after_success :
+  - git push git@heroku.com:episode5.git master
