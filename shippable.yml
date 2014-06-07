@@ -4,6 +4,7 @@ node_js:
 before_script: mkdir -p shippable/codecoverage
 minion:
   type: beshippable/demo
+  container: shippabletest/episode5
 after_script: 
   - ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -u tdd 
   - ./node_modules/.bin/istanbul report cobertura --dir  shippable/codecoverage/
