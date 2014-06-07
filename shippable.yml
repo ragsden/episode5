@@ -10,5 +10,3 @@ after_script:
 notifications:
   email:
     - raghu@shippable.com
-after_success :
-  - git push git@heroku.com:episode5.git master
